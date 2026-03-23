@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -14,7 +14,7 @@
             justify-content: center;
             height: 100vh;
             background-color: #121212;
-            /* باگراوەندی دیواری بەردین وەک وێنەکە */
+            /* باگراوەندی دیواری بەردین */
             background-image: 
                 linear-gradient(335deg, #000000 23px, transparent 23px),
                 linear-gradient(155deg, #000000 23px, transparent 23px),
@@ -22,52 +22,63 @@
                 linear-gradient(155deg, #000000 23px, transparent 23px);
             background-size: 58px 58px;
             background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-            font-family: 'Reem Kufi', sans-serif;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
             text-align: center;
+            overflow: hidden;
         }
 
         #main-container {
-            background: rgba(15, 15, 15, 0.96);
+            /* ستایلی شووشەیی (Frosted Glass) */
+            background: rgba(255, 255, 255, 0.05);
             padding: 50px 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 40px 80px rgba(0,0,0,1);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             width: 85%;
             max-width: 340px;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         h2 {
             color: #ffffff;
             margin-bottom: 40px;
-            font-size: 32px; /* گەورەتر بۆ ئەوەی فۆنتەکە دیار بێت */
-            font-weight: 400;
-            line-height: 1.5;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
+            font-size: 32px;
+            font-family: 'Reem Kufi', sans-serif; /* فۆنتی شیک بۆ ئەزیزن */
+            font-weight: 500;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         #startBtn {
-            padding: 14px 40px;
-            font-size: 18px;
-            border-radius: 50px;
-            border: none;
-            background: #ffffff;
-            color: #000000;
-            font-weight: 700;
+            padding: 15px 50px;
+            font-size: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            /* دوگمەی شووشەیی ڕووناک */
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-weight: 600;
             cursor: pointer;
-            font-family: 'Reem Kufi', sans-serif;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         #startBtn:hover {
-            transform: scale(1.05);
-            background: #f8f8f8;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #startBtn:active {
+            transform: scale(0.95);
         }
 
         #status {
-            color: #999999;
-            margin-top: 30px;
-            font-size: 18px;
+            color: #cccccc;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -75,7 +86,7 @@
 
     <div id="main-container">
         <h2 id="status">ئـــەزیــزن🩶</h2>
-        <button id="startBtn">Play Video 🎬</button>
+        <button id="startBtn">کلیککردن</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
