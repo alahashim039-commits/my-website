@@ -11,35 +11,45 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            /* باگراوەندی نەخشینی ورد وەک مافورەکان */
-            background-color: #2b0a0a;
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.15'%3E%3Cpath d='M40 40c0-8.837 7.163-16 16-16s16 7.163 16 16-7.163 16-16 16-16-7.163-16-16zm-40 0c0-8.837 7.163-16 16-16s16 7.163 16 16-7.163 16-16 16S0 48.837 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            /* باگراوەندی نەخشینی کلاسیک و شاهانە */
+            background-color: #1a2312; /* سەوزی زۆر تۆخ */
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 80%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-6.627-5.373-12-12-12S6 23.373 6 30s5.373 12 12 12 12-5.373 12-12zm0 0c0-6.627 5.373-12 12-12s12 5.373 12 12-5.373 12-12 12-12-5.373-12-12z' fill='%23d4af37' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
             font-family: sans-serif;
             text-align: center;
         }
 
         #main-container {
-            /* کاردێکی سادە بە لێواری زێڕینی زۆر باریک */
-            background: rgba(15, 15, 15, 0.9);
-            padding: 50px 30px;
-            border-radius: 5px;
-            border: 1px solid #d4af37;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            background: rgba(10, 15, 10, 0.9);
+            padding: 45px 25px;
+            border-radius: 10px;
+            border: 2px solid #b89a4b;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
             width: 80%;
             max-width: 320px;
+            position: relative;
+        }
+
+        /* وردەکاری زێڕین لە گۆشەکان */
+        #main-container::before {
+            content: "✧";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: #b89a4b;
         }
 
         h2 {
             color: #d4af37;
             margin-bottom: 30px;
-            font-size: 20px;
+            font-size: 19px;
             font-weight: normal;
         }
 
         #startBtn {
-            padding: 12px 35px;
-            font-size: 16px;
-            border-radius: 0; /* چوارگۆشەیی کلاسیک */
+            padding: 14px 30px;
+            font-size: 17px;
             border: 1px solid #d4af37;
             background: transparent;
             color: #d4af37;
@@ -50,12 +60,7 @@
 
         #startBtn:hover {
             background: #d4af37;
-            color: black;
-        }
-
-        #status {
-            color: #d4af37;
-            margin-top: 20px;
+            color: #1a2312;
         }
     </style>
 </head>
