@@ -4,12 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* باگراوەند بە ڕەنگی سەوزی مافورەکە و نەخشی کلاسیک */
+            background-color: #1b2610;
+            background-image: 
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%),
+                url('https://www.transparenttextures.com/patterns/gold-dust.png');
+            font-family: sans-serif;
+            text-align: center;
+            color: white;
+        }
+
+        #main-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid #d4af37; /* لێواری زێڕین */
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        #startBtn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            background: #d4af37; /* دوگمەی زێڕین */
+            color: #1b2610;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #startBtn:hover {
+            background: #f1c40f;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; text-align: center;">
+<body>
 
     <div id="main-container">
         <h2 id="status">ڤیدیۆکە ئامادەیە</h2>
-        <button id="startBtn" style="padding: 15px 30px; font-size: 18px; border-radius: 10px; border: none; background: #0088cc; color: white; cursor: pointer;">Play Video 🎬</button>
+        <button id="startBtn">Play Video 🎬</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
