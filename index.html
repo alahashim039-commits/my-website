@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -27,25 +27,28 @@
             position: relative;
         }
 
-        /* ستایلی ناوی Ala لە بەشی سەرەوە بە ڕەنگی تۆختر */
+        /* ستایلی نوێی ناوی Ala */
         .name-tag {
             position: absolute;
-            top: 12%; /* بردنی بۆ سەرەوە */
+            top: 15%; 
             left: 50%;
             transform: translateX(-50%);
-            font-family: 'Unbounded', sans-serif; /* فۆنتی نوێ و شیک */
-            font-size: 50px;
-            color: rgba(255, 255, 255, 0.4); /* تۆختر کرا بۆ ئەوەی باشتر ببینرێت */
+            font-family: 'Montserrat', sans-serif; /* فۆنتی نوێی Montserrat */
+            font-size: 38px; /* بچووکتر کرا */
+            color: rgba(255, 255, 255, 0.5); /* ڕەنگی تۆخ و ڕوون */
             white-space: nowrap;
             z-index: 0;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-direction: row-reverse; /* بۆ ئەوەی دڵەکە بچێتە لای ڕاست */
         }
 
         .heart-mini {
-            font-size: 30px; /* بچووککردنەوەی دڵەکە */
-            vertical-align: middle;
-            opacity: 0.8;
+            font-size: 22px; /* دڵێکی بچووک و ناسک */
+            opacity: 0.9;
         }
 
         #main-container {
@@ -98,7 +101,7 @@
 </head>
 <body>
 
-    <div class="name-tag">Ala<span class="heart-mini">🩶</span></div>
+    <div class="name-tag"><span class="heart-mini">🩶</span>Ala</div>
 
     <div id="main-container">
         <h2 id="status">ئـــەزیــزن🩶</h2>
