@@ -14,7 +14,7 @@
             justify-content: center;
             height: 100vh;
             background-color: #121212;
-            /* باگراوەندی دیواری بەردین */
+            /* باگراوەندی دیواری بەردینی ڕەش */
             background-image: 
                 linear-gradient(335deg, #000000 23px, transparent 23px),
                 linear-gradient(155deg, #000000 23px, transparent 23px),
@@ -28,12 +28,12 @@
         }
 
         #main-container {
-            /* ستایلی شووشەیی (Frosted Glass) */
-            background: rgba(255, 255, 255, 0.05);
-            padding: 50px 30px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            /* ستایلی شووشەیی (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.03);
+            padding: 55px 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             width: 85%;
             max-width: 340px;
             backdrop-filter: blur(15px);
@@ -42,34 +42,36 @@
 
         h2 {
             color: #ffffff;
-            margin-bottom: 40px;
-            font-size: 32px;
-            font-family: 'Reem Kufi', sans-serif; /* فۆنتی شیک بۆ ئەزیزن */
+            margin-bottom: 45px;
+            font-size: 34px;
+            font-family: 'Reem Kufi', sans-serif;
             font-weight: 500;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         #startBtn {
-            padding: 15px 50px;
+            padding: 16px 30px;
             font-size: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            /* دوگمەی شووشەیی ڕووناک */
-            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            /* ستایلی شووشەیی بۆ دوگمەکە */
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
             font-weight: 600;
             cursor: pointer;
             font-family: 'IBM Plex Sans Arabic', sans-serif;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         #startBtn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         #startBtn:active {
@@ -77,8 +79,8 @@
         }
 
         #status {
-            color: #cccccc;
-            margin-top: 20px;
+            color: #bbbbbb;
+            margin-top: 25px;
         }
     </style>
 </head>
@@ -86,7 +88,7 @@
 
     <div id="main-container">
         <h2 id="status">ئـــەزیــزن🩶</h2>
-        <button id="startBtn">کلیککردن</button>
+        <button id="startBtn">&lt;👈🏽کلیک کردن👉🏽&gt;</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
