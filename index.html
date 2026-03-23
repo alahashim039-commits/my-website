@@ -11,43 +11,47 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            /* باگراوەند بە ڕەنگی سەوزی مافورەکە و نەخشی کلاسیک */
-            background-color: #1b2610;
-            background-image: 
-                radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%),
-                url('https://www.transparenttextures.com/patterns/gold-dust.png');
+            /* بەکارهێنانی وێنەی مافورەکان وەک باگراوند */
+            background-image: url('https://raw.githubusercontent.com/alahashim039-commits/my-website/main/image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             font-family: sans-serif;
             text-align: center;
             color: white;
         }
 
+        /* دروستکردنی چینێکی لێڵ بۆ ئەوەی نووسینەکە بە جوانی بخوێنرێتەوە */
         #main-container {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 40px;
-            border-radius: 15px;
-            border: 2px solid #d4af37; /* لێواری زێڕین */
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            width: 80%;
+            max-width: 350px;
         }
 
         h2 {
             margin-bottom: 25px;
+            font-size: 20px;
         }
 
         #startBtn {
             padding: 15px 30px;
             font-size: 18px;
-            border-radius: 10px;
+            border-radius: 50px;
             border: none;
-            background: #d4af37; /* دوگمەی زێڕین */
-            color: #1b2610;
+            background: #ffffff;
+            color: #000;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        #startBtn:hover {
-            background: #f1c40f;
-            transform: scale(1.05);
+        #startBtn:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
