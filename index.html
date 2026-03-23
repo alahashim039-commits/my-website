@@ -11,57 +11,51 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            /* باگراوەندی مافوری کلاسیک - ڕەنگی زەیتوونی و سوور */
-            background: #1a0f0a url('https://www.transparenttextures.com/patterns/aged-paper.png');
-            background-color: #2e3b23;
-            position: relative;
-            overflow: hidden;
+            /* باگراوەندی نەخشینی ورد وەک مافورەکان */
+            background-color: #2b0a0a;
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.15'%3E%3Cpath d='M40 40c0-8.837 7.163-16 16-16s16 7.163 16 16-7.163 16-16 16-16-7.163-16-16zm-40 0c0-8.837 7.163-16 16-16s16 7.163 16 16-7.163 16-16 16S0 48.837 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             font-family: sans-serif;
-        }
-
-        /* دروستکردنی شێوەی مافور لە باگراوند */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(45deg, rgba(165, 42, 42, 0.1) 0px, rgba(165, 42, 42, 0.1) 2px, transparent 2px, transparent 10px);
-            z-index: -1;
+            text-align: center;
         }
 
         #main-container {
-            background: rgba(40, 40, 40, 0.95);
-            padding: 40px 20px;
-            border-radius: 10px;
-            border: 3px double #d4af37; /* لێواری زێڕینی کلاسیک */
-            box-shadow: 0 0 50px rgba(0,0,0,0.9);
-            text-align: center;
-            width: 85%;
+            /* کاردێکی سادە بە لێواری زێڕینی زۆر باریک */
+            background: rgba(15, 15, 15, 0.9);
+            padding: 50px 30px;
+            border-radius: 5px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            width: 80%;
             max-width: 320px;
-            z-index: 10;
         }
 
         h2 {
             color: #d4af37;
-            margin-bottom: 25px;
-            font-size: 18px;
-            text-shadow: 1px 1px 2px #000;
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: normal;
         }
 
         #startBtn {
-            padding: 12px 25px;
+            padding: 12px 35px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 0; /* چوارگۆشەیی کلاسیک */
             border: 1px solid #d4af37;
-            background: #fdfdfd;
-            color: #000;
+            background: transparent;
+            color: #d4af37;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 0 #b8860b;
+            transition: 0.3s;
         }
 
-        #startBtn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #b8860b;
+        #startBtn:hover {
+            background: #d4af37;
+            color: black;
+        }
+
+        #status {
+            color: #d4af37;
+            margin-top: 20px;
         }
     </style>
 </head>
