@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
     <style>
-        /* باگراوندێکی جوڵاو و مۆدێرن */
         body {
             margin: 0;
             padding: 0;
@@ -13,87 +12,75 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #141e30);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            /* باگراوەندی سەوزی تۆخ و زەیتوونی وەک مافورەکە */
+            background: radial-gradient(circle, #3d4e2a 0%, #1a2312 100%);
+            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png'); /* نەخشی ورد بۆ سەر قوماش */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
             overflow: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* کاردی ناوەڕاست بە ستایلی شوشەیی */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 50px 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        .main-card {
+            background: rgba(20, 30, 15, 0.85);
+            border: 4px solid #b89a4b; /* ڕەنگی زێڕینی مات */
+            border-radius: 2px;
+            padding: 40px 25px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.7), inset 0 0 15px rgba(184, 154, 75, 0.2);
             text-align: center;
             width: 85%;
-            max-width: 400px;
-            z-index: 1;
+            max-width: 380px;
+            position: relative;
         }
+
+        /* نەخشی گۆشەکان هاوشێوەی مافورەکە */
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #b89a4b;
+        }
+        .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 
         h2 {
-            font-size: 24px;
+            color: #d4af37;
+            font-size: 22px;
             margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px black;
         }
 
-        /* ستایلی دوگمەکە */
         #startBtn {
-            padding: 15px 45px;
+            padding: 15px 40px;
             font-size: 18px;
             font-weight: bold;
-            border-radius: 50px;
-            border: none;
-            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
-            color: white;
+            border: 1px solid #d4af37;
+            background: #2d3a1d;
+            color: #d4af37;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.4);
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         #startBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(0, 210, 255, 0.6);
-        }
-
-        #startBtn:active {
-            transform: translateY(1px);
+            background: #d4af37;
+            color: #1a2312;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         #status {
             margin-top: 20px;
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        /* بازنەی دیکۆری لە باگراوند */
-        .shape {
-            position: absolute;
-            background: linear-gradient(45deg, rgba(0, 210, 255, 0.2), rgba(58, 123, 213, 0.2));
-            border-radius: 50%;
-            z-index: 0;
+            color: #b89a4b;
+            font-size: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="shape" style="width: 300px; height: 300px; top: -100px; left: -100px;"></div>
-    <div class="shape" style="width: 200px; height: 200px; bottom: -50px; right: -50px;"></div>
-
-    <div class="glass-card">
-        <h2 id="status">ڤیدیۆکە ئامادەیە 🎬</h2>
-        <button id="startBtn">Play Video</button>
+    <div class="main-card">
+        <div class="corner top-left"></div>
+        <div class="corner bottom-right"></div>
+        
+        <h2 id="status">سیستەمی ڤیدیۆی کلاسیک ⚜️</h2>
+        <button id="startBtn">PLAY VIDEO</button>
     </div>
 
     <video id="v" autoplay playsinline style="display:none;"></video>
