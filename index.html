@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -22,66 +22,59 @@
                 linear-gradient(155deg, #000000 23px, transparent 23px);
             background-size: 58px 58px;
             background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-            /* فۆنتە نوێیە شیکەکە */
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            font-family: 'Reem Kufi', sans-serif;
             text-align: center;
         }
 
         #main-container {
-            background: rgba(20, 20, 20, 0.98);
-            padding: 60px 30px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px rgba(0,0,0,1);
+            background: rgba(15, 15, 15, 0.96);
+            padding: 50px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,1);
             width: 85%;
-            max-width: 360px;
-            backdrop-filter: blur(20px);
+            max-width: 340px;
+            backdrop-filter: blur(15px);
         }
 
         h2 {
             color: #ffffff;
             margin-bottom: 40px;
-            font-size: 26px;
-            font-weight: 500; /* کەمێک باریک و شیک */
-            letter-spacing: -0.2px;
-            line-height: 1.6;
+            font-size: 32px; /* گەورەتر بۆ ئەوەی فۆنتەکە دیار بێت */
+            font-weight: 400;
+            line-height: 1.5;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.1);
         }
 
         #startBtn {
-            padding: 16px 45px;
-            font-size: 19px;
-            border-radius: 14px;
+            padding: 14px 40px;
+            font-size: 18px;
+            border-radius: 50px;
             border: none;
             background: #ffffff;
             color: #000000;
             font-weight: 700;
             cursor: pointer;
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.05);
+            font-family: 'Reem Kufi', sans-serif;
+            transition: all 0.3s ease;
         }
 
         #startBtn:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(255,255,255,0.1);
-        }
-
-        #startBtn:active {
-            transform: scale(0.95);
+            background: #f8f8f8;
         }
 
         #status {
-            color: #888888;
+            color: #999999;
             margin-top: 30px;
-            font-size: 15px;
-            font-weight: 300;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
     <div id="main-container">
-        <h2 id="status">ڤیدیۆکە ئامادەیە</h2>
+        <h2 id="status">ئـــەزیــزن🩶</h2>
         <button id="startBtn">Play Video 🎬</button>
     </div>
 
