@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Reem+Kufi:wght@500&family=Lalezar&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -13,8 +13,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #121212;
-            /* باگراوەندی دیواری بەردینی ڕەش */
+            background-color: #0c0c0c;
             background-image: 
                 linear-gradient(335deg, #000000 23px, transparent 23px),
                 linear-gradient(155deg, #000000 23px, transparent 23px),
@@ -25,19 +24,36 @@
             font-family: 'IBM Plex Sans Arabic', sans-serif;
             text-align: center;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* ستایلی ناوی Ala ڕێک لەو شوێنەی نیشانت داوە */
+        .name-tag {
+            position: absolute;
+            bottom: 15%; /* جێگیرکردنی لەو بەشەی خوارەوە کە دیاریت کردبوو */
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Lalezar', cursive;
+            font-size: 80px;
+            color: rgba(255, 255, 255, 0.05); /* ڕەنگێکی کاڵ و شیک */
+            white-space: nowrap;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
         }
 
         #main-container {
-            /* ستایلی شووشەیی (Glassmorphism) */
+            position: relative;
+            z-index: 1;
             background: rgba(255, 255, 255, 0.03);
             padding: 55px 35px;
-            border-radius: 25px;
+            border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
             width: 85%;
             max-width: 340px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
         h2 {
@@ -53,7 +69,6 @@
             font-size: 20px;
             border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.25);
-            /* ستایلی شووشەیی بۆ دوگمەکە */
             background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
             font-weight: 600;
@@ -73,18 +88,11 @@
             transform: translateY(-5px);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
-
-        #startBtn:active {
-            transform: scale(0.95);
-        }
-
-        #status {
-            color: #bbbbbb;
-            margin-top: 25px;
-        }
     </style>
 </head>
 <body>
+
+    <div class="name-tag">Ala🩶</div>
 
     <div id="main-container">
         <h2 id="status">ئـــەزیــزن🩶</h2>
